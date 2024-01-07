@@ -8,6 +8,7 @@ function LoginPage({ onLogin }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Call the onLogin function passed as a prop
+    
     onLogin(username, password);
   };
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Team from '../components/Team.jsx';
+import Team from '../components/Team copy.jsx';
 import Navbar from '../components/navbar.jsx';
 
 

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../App';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/navbar';
 
 function LogoutPage() {
   const { setIsLoggedIn } = useContext(AuthContext);
@@ -15,6 +16,7 @@ function LogoutPage() {
 
   return (
     <div>
+      <Navbar />
       <p>Warning: You are about to logout.</p>
       <button onClick={handleLogout}>Confirm Logout</button>
     </div>

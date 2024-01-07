@@ -1,6 +1,7 @@
 import React from "react";
 import Hello from "../components/welcome";
 import NavBar from "../components/navbar";
+
 import "../css/home.css"
 function HomePage() {
     return (

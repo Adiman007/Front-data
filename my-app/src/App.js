@@ -34,7 +34,7 @@ function App() {
               <Route path="/team" element={<TeamPage />} />
               <Route path="/home" element={<HomePage />} />
               
-                <Route path="/logout" element={<LogoutPage />} />
+                <Route path="/logout" element={<LogoutPage onLogout={handleLogout} />} />
               
           </>
         ) : (  
@@ -43,7 +43,10 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
           </>
         )}
-        <Route path="*" element={<NotFoundPage />} />
+        {isLoggedIn ? (<Route path="*" element={<HomePage />} />)
+        : (<Route path="*" element={<RegisterPage />} />)
+        }
+        
       </Routes>
     </AuthContext.Provider>
     </BrowserRouter>
