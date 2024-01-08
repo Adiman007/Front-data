@@ -1,21 +1,28 @@
 
 import React, { useState,useEffect } from 'react';
 import NewPokemonDisplay from './NewDisplay.jsx';
+import axios from 'axios';
 import '../css/Team.css';
 
-const pokemonList = [{name: "pikachu", shiny: false},{name:'1005',shiny:false},{name:'65',shiny:true},{name:'25',shiny:true},{name:"kyogre",shiny:true}, {name: "charizard", shiny: true},{name:18,shiny:true}];
+//const pokemonList = [{name: "pikachu", shiny: false},{name:'1005',shiny:false},{name:'65',shiny:true},{name:'25',shiny:true},{name:"kyogre",shiny:true}, {name: "charizard", shiny: true},{name:18,shiny:true}];
+
 function Team(){
-/*
+  const [pokemonList,setPokemonList] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-        const result = await axios(
-        `https://pokeapi.co/api/v2/pokemon/${rand}`
-      );
-      setPokemonList(result.data);
+      //const token = localStorage.getItem('token'); // Get the user bearer token from local storage
+      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTljMTg0NDE3Y2U2ZGRjMTJmOWY0MTAiLCJpYXQiOjE3MDQ3MzAxODZ9.Wom3mkKXoB5f3P8pSHzwH_puRnnIm3nkGqsYNmsvVUM";
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}` // Include the token in the request headers
+        }
+      };
+      const result = await axios.get(`http://localhost:3001/users/me`, config); // Pass the config object with headers
+      setPokemonList(result.data.pokemons);
     };
     fetchData();
-  }, [pokemonList]);
-  */
+  }, []); // Add an empty dependency array
+  
     return (
       <div className="Team">
         <table>
@@ -24,7 +31,7 @@ function Team(){
                 return (
                   <>
                     <td key={pokemon.name}>
-                      <NewPokemonDisplay name={pokemon.name} shiny={pokemon.shiny} /> {/* Pass the pokemon object and shiny value as separate props to PokemonDisplay */}
+                      <NewPokemonDisplay name={pokemon.id} shiny={pokemon.shiny} /> {/* Pass the pokemon object and shiny value as separate props to PokemonDisplay */}
                     </td>
                     {(index + 1) % 3 === 0 && <tr></tr>} {/* Add a line break after every 3 pokemons */}
                   </>
