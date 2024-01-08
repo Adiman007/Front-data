@@ -14,7 +14,7 @@ import './css/App.css';
 export const AuthContext = createContext();
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true); //change to false
+  const [isLoggedIn, setIsLoggedIn] = useState(false); //change to false
 
   const handleLogin = () => {
     setIsLoggedIn(true);
