@@ -3,6 +3,7 @@ import React, { useState,useEffect } from 'react';
 import NewPokemonDisplay from './NewDisplay.jsx';
 import axios from 'axios';
 import '../css/Team.css';
+import Cookies from 'js-cookie';
 
 //const pokemonList = [{name: "pikachu", shiny: false},{name:'1005',shiny:false},{name:'65',shiny:true},{name:'25',shiny:true},{name:"kyogre",shiny:true}, {name: "charizard", shiny: true},{name:18,shiny:true}];
 
@@ -11,7 +12,7 @@ function Team(){
   useEffect(() => {
     const fetchData = async () => {
       //const token = localStorage.getItem('token'); // Get the user bearer token from local storage
-      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTljMTg0NDE3Y2U2ZGRjMTJmOWY0MTAiLCJpYXQiOjE3MDQ3MzAxODZ9.Wom3mkKXoB5f3P8pSHzwH_puRnnIm3nkGqsYNmsvVUM";
+      const token = Cookies.get('jwt');
       const config = {
         headers: {
           Authorization: `Bearer ${token}` // Include the token in the request headers
