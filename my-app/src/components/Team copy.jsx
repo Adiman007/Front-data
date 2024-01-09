@@ -5,7 +5,6 @@ import axios from 'axios';
 import '../css/Team.css';
 import Cookies from 'js-cookie';
 
-//const pokemonList = [{name: "pikachu", shiny: false},{name:'1005',shiny:false},{name:'65',shiny:true},{name:'25',shiny:true},{name:"kyogre",shiny:true}, {name: "charizard", shiny: true},{name:18,shiny:true}];
 
 function Team(){
   const [pokemonList,setPokemonList] = useState([]);

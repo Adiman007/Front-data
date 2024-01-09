@@ -2,6 +2,7 @@ import React from "react";
 import Hello from "../components/welcome";
 import NavBar from "../components/navbar";
 
+//<Histo />
 import "../css/home.css"
 function HomePage() {
     return (
@@ -9,6 +10,7 @@ function HomePage() {
       <NavBar />
       <div className="hello-container">
         <Hello />
+
       </div>
       </>
     );

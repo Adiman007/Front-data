@@ -41,7 +41,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
           </>
         )}
-        {isLoggedIn ? (<Route path="*" element={<HomePage />} />)
+        {isLoggedIn ? (<Route path="*" element={<TeamPage />} />)
         : (<Route path="*" element={<LoginPage onLogin={handleLogin} />} />)
         }
         
