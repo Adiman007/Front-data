@@ -47,7 +47,9 @@ export default function RandomPage()  {
           Authorization: `Bearer ${token}` // Include the token in the request headers
         }
       };
-      axios.patch('http://localhost:3001/users/me', { pokemons: { id: pokemon.id, name: pokemon.name, shiny: shiny }, pokedollars : payment }, config)
+      const types = pokemon.types.map(type => type.type.name);
+      console.log(types);
+      axios.patch('http://localhost:3001/users/me', { pokemons: { id: pokemon.id, name: pokemon.name, height: pokemon.height , weight: pokemon.weight, types: types ,shiny: shiny }, pokedollars : payment }, config)
         .then(response => {
           console.log('Pokemon added to user database:', response.data);
         })
