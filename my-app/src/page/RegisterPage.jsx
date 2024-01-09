@@ -22,7 +22,7 @@ function RegisterPage({ onRegister }) {
       "pokedollars": pokemoula
     };
 
-    fetch('http://localhost:3001/users/register', {
+    fetch('https://backend-web-app.onrender.com/users/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
