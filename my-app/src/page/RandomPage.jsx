@@ -41,14 +41,12 @@ export default function RandomPage()  {
     if (pokemon){
     const token = Cookies.get('jwt');
     setMoney(money + payment);
-    console.log(shiny);
       const config = {
         headers: {
           Authorization: `Bearer ${token}` // Include the token in the request headers
         }
       };
       const types = pokemon.types.map(type => type.type.name);
-      console.log(types);
       axios.patch('http://localhost:3001/users/me', { pokemons: { id: pokemon.id, name: pokemon.name, height: pokemon.height , weight: pokemon.weight, types: types ,shiny: shiny }, pokedollars : payment }, config)
         .then(response => {
           console.log('Pokemon added to user database:', response.data);
@@ -69,7 +67,11 @@ export default function RandomPage()  {
   }
 
   const hatchPokemon = async () => {
-    if (money >= pokemonCost) {
+    var cost = pokemonCost;
+    if(shiny){
+      cost = pokemonCostShiny;
+    }
+    if (money >= cost) {
       await getRandomPokemon();
     } else {
       alert("You don't have enough money to hatch a Pokemon");
