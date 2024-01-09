@@ -35,7 +35,7 @@ useEffect(() => {
                 Authorization: `Bearer ${token}` // Include the token in the request headers
             }
         };
-        const result = await axios.get(`http://localhost:3001/users/me`, config); // Pass the config object with headers
+        const result = await axios.get(`https://backend-web-app.onrender.com/users/me`, config); // Pass the config object with headers
         const pokemonTypes = {};
         const listNameHeight = [["name","height"]];
         const listHeightWeight = [["name","weight"]];

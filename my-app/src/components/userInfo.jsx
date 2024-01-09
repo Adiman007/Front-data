@@ -20,7 +20,7 @@ function UserInfo() {
                 }
             };
             console.log("we will perform a get request to /users/me");
-            const result = await axios.get(`http://localhost:3001/users/me`, config); // Pass the config object with headers
+            const result = await axios.get(`https://backend-web-app.onrender.com/users/me`, config); // Pass the config object with headers
             setUser(result.data);  
             const pokemonTypes = {};
             result.data.pokemons.forEach(pokemon => {
