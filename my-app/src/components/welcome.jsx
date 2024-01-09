@@ -20,7 +20,7 @@ function Hello() {
       setUser(result.data);
     };
     fetchData();
-  }, [user])
+  }, [])
 
   return (
     <>

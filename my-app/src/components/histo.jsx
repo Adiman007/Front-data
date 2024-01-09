@@ -17,7 +17,8 @@ const options2 = {
 const options3 = {
     title: "Company Performance",
     curveType: "function",
-    legend: { position: "bottom" },
+    legend: { position: "top" },
+    interpolateNulls: false,
 };
 
 
@@ -98,7 +99,7 @@ useEffect(() => {
     <tr>
       <td>
     <div className="Histogram-types">
-      <h2>Histogram of your Pokemon types</h2>
+      <h2>Repartition of Pokemons' height</h2>
       <Chart
         chartType="Histogram"
         data={chartData2}
@@ -110,7 +111,7 @@ useEffect(() => {
     </td>
     <td>
     <div className="Histogram-types">
-      <h2>Histogram of your Pokemon types</h2>
+      <h2>Pokemons' heigth relative to weigth</h2>
       <Chart
         chartType="Scatter"
         width="80%"

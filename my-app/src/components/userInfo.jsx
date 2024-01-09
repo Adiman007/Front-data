@@ -19,6 +19,7 @@ function UserInfo() {
                     Authorization: `Bearer ${token}` // Include the token in the request headers
                 }
             };
+            console.log("we will perform a get request to /users/me");
             const result = await axios.get(`http://localhost:3001/users/me`, config); // Pass the config object with headers
             setUser(result.data);  
             const pokemonTypes = {};
@@ -36,8 +37,12 @@ function UserInfo() {
             var height = 0;
             var weight = 0;
             result.data.pokemons.forEach(pokemon => {
-                height += pokemon.height;
-                weight += pokemon.weight;
+                if (pokemon.height){
+                    height += pokemon.height;
+                }
+                if (pokemon.weight){
+                    weight += pokemon.weight;
+                }
                 if (pokemon.shiny === true) {
                     shinyCount += 1;
                 }
@@ -74,7 +79,7 @@ function UserInfo() {
                         Shiny Pokemons: {shinyNumber}
                     </p>
                     <p className="UserInfo-text">
-                        Shiny repartitions: {shinyNumber/user.pokemons.length*100}%
+                        Shiny repartitions: {Number(shinyNumber/user.pokemons.length*100).toFixed(1)}%
                     </p>
                     <p className="UserInfo-text">
                         Pokemon Types: 
