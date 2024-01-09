@@ -26,7 +26,7 @@ function Navbar() {
         <li>
           <Link to="/hatch">
           <RandomIcon className="icon"/>
-          Hatch eggs
+          Hatch
           </Link>
         </li>
         <li>

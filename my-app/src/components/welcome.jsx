@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import UserInfo from "./userInfo";
+import Histo from "./histo";
 
 function Hello() {
   const [user, setUser] = useState(null);
@@ -22,16 +23,13 @@ function Hello() {
   }, [user])
 
   return (
+    <>
     <div className="welcome-banner">
       {user && 
       <>
-      <h1 className="welcome-banner-title">Welcome to this app : {user.username}</h1>
       
       <p className="welcome-banner-text">
         This is a simple app that uses React , pokeapi.co and a custom backend
-      </p>
-      <p className="welcome-banner-text">
-        Click on the links above to navigate the site
       </p>
       </>
        }
@@ -56,9 +54,11 @@ function Hello() {
           <img src="https://avatars.githubusercontent.com/u/104773256?v=4" alt="Github Logo"/>
           </a> 
       </p>
-      <UserInfo />
+        <UserInfo />
+        
+      </div>
 
-    </div>
+     </>
   );
 }
 

@@ -8,6 +8,8 @@ function UserInfo() {
     const [user, setUser] = useState(null);
     const [pokemonTypesFinal, setPokemonTypesFinal] = useState([]);
     const [shinyNumber, setShinyNumber] = useState(0);
+    const [averageHeight, setAverageHeight] = useState(0);
+    const [averageWeight, setAverageWeight] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,7 +33,11 @@ function UserInfo() {
             });
 
             var shinyCount = 0;
+            var height = 0;
+            var weight = 0;
             result.data.pokemons.forEach(pokemon => {
+                height += pokemon.height;
+                weight += pokemon.weight;
                 if (pokemon.shiny === true) {
                     shinyCount += 1;
                 }
@@ -39,6 +45,8 @@ function UserInfo() {
             console.log(pokemonTypes);
             setPokemonTypesFinal(Object.entries(pokemonTypes));
             setShinyNumber(shinyCount);
+            setAverageHeight(Number((height/result.data.pokemons.length).toFixed(1)));
+            setAverageWeight(Number((weight/result.data.pokemons.length).toFixed(1)));
         };
         fetchData();
     }, [])
@@ -74,7 +82,12 @@ function UserInfo() {
                             <span key={type}> | {type} : {count} </span>
                         ))}
                     </p>
-                    
+                    <p className="UserInfo-text">
+                        Average size of your pokemons {averageHeight} cm
+                    </p>
+                    <p className="UserInfo-text">
+                        Average weight of your pokemons {averageWeight} kg
+                    </p>
                 </>
             }
         </div>

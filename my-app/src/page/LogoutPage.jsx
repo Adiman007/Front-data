@@ -3,6 +3,8 @@ import { AuthContext } from '../App';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/navbar';
 import Cookies from 'js-cookie';
+import Histo from "../components/histo";
+
 
 function LogoutPage() {
   const { setIsLoggedIn } = useContext(AuthContext);
@@ -21,6 +23,9 @@ function LogoutPage() {
       <Navbar />
       <p>Warning: You are about to logout.</p>
       <button onClick={handleLogout}>Confirm Logout</button>
+      <div className="histogrammes">
+        <Histo/>
+      </div>
     </div>
   );
 }
