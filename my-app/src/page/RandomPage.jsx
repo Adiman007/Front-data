@@ -1,96 +1,96 @@
-import React, { useState,useEffect } from "react";
-import NewPokemonDisplay from "../components/NewDisplay";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import "../css/RandomPage.css";
+import axios from "axios";
+import Cookies from 'js-cookie';
+import NewPokemonDisplay from "../components/NewDisplay";
 import Navbar from "../components/navbar";
-import Cookies from "js-cookie";
 
 export default function RandomPage()  {
-  const randomPokemonId = Math.floor(Math.random() * 1000) + 1
-  const [pokemon, setPokemon] = useState(randomPokemonId);
-  const [shiny, setShiny] = useState(false);
-  const [dollars, setDollars] = useState(null);
-  const [pokemonName, setPokemonName] = useState("");
-  const [pokemonList,setPokemonList] = useState([]);
-  const [payment,setPayment] = useState(null);
-  const shinyChance = Math.random();
-  
-  const shinyPrice = -1500;
-  const basicPrice = -100;
+  const [money, setMoney] = useState(0); // initial money
+  const pokemonCost = 100;
+  const pokemonCostShiny =1500; // cost to hatch a pokemon
+  const [pokemon, setPokemon] = useState(null); // initial pokemon
+  const [shiny, setShiny] = useState(false); // initial shiny value
+  const [payment,setPayment] = useState(100); // initial payment value
 
   useEffect(() => {
-    const getUser = async () => {    
     const token = Cookies.get('jwt');
     const config = {
       headers: {
         Authorization: `Bearer ${token}` // Include the token in the request headers
       }
     };
-    const result = await axios.get(`http://localhost:3001/users/me`, config); // Pass the config object with headers
-    console.log(result.data);
-    setPokemonList(result.data.pokemons);
-    setDollars(result.data.pokedollars);
-    };
-  getUser();
-}, []); 
-    
+    axios.get('http://localhost:3001/users/me', config)
+      .then(response => {
+        setMoney(response.data.pokedollars);
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      });
+  }, []);
+
   useEffect(() => {
-    const getPokemonName = async () => {
-        
-        const result = await axios(
-        `https://pokeapi.co/api/v2/pokemon/${pokemon}`
-      );
-      setPokemonName(result.data.name);
-    };
-    getPokemonName();
+    if (shiny === true) {
+      setPayment(- pokemonCostShiny);
+    } else {
+      setPayment(- pokemonCost);
+    }
+  }, [shiny]);
+
+  useEffect(() => {
+    if (pokemon){
+    const token = Cookies.get('jwt');
+    setMoney(money + payment);
+    console.log(shiny);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}` // Include the token in the request headers
+        }
+      };
+      axios.patch('http://localhost:3001/users/me', { pokemons: { id: pokemon.id, name: pokemon.name, shiny: shiny }, pokedollars : payment }, config)
+        .then(response => {
+          console.log('Pokemon added to user database:', response.data);
+        })
+        .catch(error => {
+          console.error('There was an error adding the Pokemon to user database:', error);
+        });
+      }
   }, [pokemon]);
 
-  function hacthPokemonClick() {
-    if (dollars < basicPrice && shiny === false) {
-      alert("You don't have enough money to hatch a pokemon");
-      return;
-    } 
-    if (dollars < shinyPrice && shiny === true) {
-      alert("You don't have enough money to hatch a shiny pokemon");
-      return;
-    }
-    while (pokemon in pokemonList){
-      setPokemon(Math.floor(Math.random() * 1000) + 1);
-    }
-    console.log(`c'est un shiny ? ${shiny}`);
-    setPayment(-100);
-    if (shiny === true) {
-      setPayment(-1500);
-    }
-    
-    if (shinyChance >= 0.95 && shiny === false) {
-      setShiny(true);
-    }
-    const token = Cookies.get('jwt');
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}` // Include the token in the request headersz
-      }
-    };
-    console.log(payment)
-
-    const result = axios.patch(`http://localhost:3001/users/me`, { pokemons: {id: pokemon, name: pokemonName, shiny: shiny}, pokedollars: payment }, config); // Pass the data payload along with the config object
-    console.log(result);
+  const getRandomPokemon = async () => {
+    const rand = Math.floor(Math.random() * 1010) + 1;
+    await axios.get(`https://pokeapi.co/api/v2/pokemon/${rand}`)
+      .then(response => {
+        setPokemon(response.data);
+        return response.data;
+      });
   }
 
-    return (
-      <>
+  const hatchPokemon = async () => {
+    if (money >= pokemonCost) {
+      await getRandomPokemon();
+    } else {
+      alert("You don't have enough money to hatch a Pokemon");
+    }
+  }
+
+  return (
+    <>
       <Navbar />
       <div className="pokemon">
-        <NewPokemonDisplay name={pokemon} shiny={shiny}/>
-        <p className="money">${dollars}$</p>
+        <div className="money-display">You have ${money}</div>
+        {pokemon && <div className="pokemon-name-display">Your new Pokemon is {pokemon.name}
+        <NewPokemonDisplay name={pokemon && pokemon.name} shiny={shiny} />
+        </div>
+        }
+        
         <button className="pokemon-button" onClick={() => setShiny(!shiny)}>
         swap to {!shiny ? "100% shiny chance" : "5% shiny chance"}
         </button>
-        <button className="pokemon-button" onClick={hacthPokemonClick}>
+        <button className="pokemon-button" onClick={hatchPokemon}>
           Hacth a random {shiny ? "shiny" : ""} pokemon {shiny ? "1500$" : "100$"}
         </button>
       </div>
-      </>
-    );
-  }
+    </>
+  );
+}

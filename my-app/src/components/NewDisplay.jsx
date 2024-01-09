@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../css/PokemonDisplay.css";
 
-const NewPokemonDisplay = ({name,shiny}) => {
+const NewPokemonDisplay = ({name,shiny}) => { //affichage d'un pokemon
   const [pokemon, setPokemon] = useState(null);
   const [pokemonName, setPokemonName] = useState(null);
   const [types, setTypes] = useState([]);
   const [bool, setBool] = useState(false);
 
-  useEffect(() => {
+  useEffect(() => { 
     const fetchData = async () => {
         const randPokemon = Math.floor(Math.random() * 1010) + 1;
         const rand = name ?? randPokemon;

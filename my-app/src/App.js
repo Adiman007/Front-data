@@ -2,7 +2,6 @@ import React, { useState, createContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import TeamPage from './page/TeamPage';
 import RandomPage from './page/RandomPage';
-import NotFoundPage from './page/NotFoundPage';
 import HomePage from './page/HomePage';
 
 import LoginPage from './page/LoginPage';
@@ -33,8 +32,7 @@ function App() {
               <Route path="/hatch" element={<RandomPage />} />
               <Route path="/team" element={<TeamPage />} />
               <Route path="/home" element={<HomePage />} />
-              
-                <Route path="/logout" element={<LogoutPage onLogout={handleLogout} />} />
+              <Route path="/logout" element={<LogoutPage onLogout={handleLogout} />} />
               
           </>
         ) : (  
@@ -44,7 +42,7 @@ function App() {
           </>
         )}
         {isLoggedIn ? (<Route path="*" element={<HomePage />} />)
-        : (<Route path="*" element={<RegisterPage />} />)
+        : (<Route path="*" element={<LoginPage onLogin={handleLogin} />} />)
         }
         
       </Routes>
