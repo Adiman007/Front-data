@@ -4,7 +4,6 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import UserInfo from "./userInfo";
-import Histo from "./histo";
 
 function Hello() {
   const [user, setUser] = useState(null);
@@ -54,10 +53,8 @@ function Hello() {
           <img src="https://avatars.githubusercontent.com/u/104773256?v=4" alt="Github Logo"/>
           </a> 
       </p>
-        <UserInfo />
-        
+        <UserInfo /> 
       </div>
-
      </>
   );
 }

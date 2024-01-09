@@ -25,12 +25,10 @@ function LoginPage({ onLogin }) {
       body: JSON.stringify(data)
     })
     .then(response => {
-      console.log(response);
       return response.json(); // Return the response.json() promise
     })
     .then(data => {
       // Handle the response data here
-      console.log(data);
       Cookies.set('jwt', data.jwt);
     })
     .catch((error) => {

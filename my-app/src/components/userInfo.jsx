@@ -47,7 +47,6 @@ function UserInfo() {
                     shinyCount += 1;
                 }
             });
-            console.log(pokemonTypes);
             setPokemonTypesFinal(Object.entries(pokemonTypes));
             setShinyNumber(shinyCount);
             setAverageHeight(Number((height/result.data.pokemons.length).toFixed(1)));

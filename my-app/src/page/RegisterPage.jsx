@@ -7,7 +7,7 @@ function RegisterPage({ onRegister }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('user');
-  const [pokemoula, setPokemoula] = useState(1000);
+  const [pokemoula, setPokemoula] = useState(100000);
 
   const navigate = useNavigate();
 
@@ -30,12 +30,10 @@ function RegisterPage({ onRegister }) {
       body: JSON.stringify(data)
     })
     .then(response => {
-      console.log(response);
       response.json()
     })
     .then(data => {
       // Handle the response data here
-      console.log(data);
       navigate('/login');
     })
     .catch((error) => {

@@ -10,12 +10,12 @@ const options = {
   interpolateNulls: false,
 }
 const options2 = {
-  title: "Lengths of dinosaurs, in meters",
+  title: "Repartition of your Pokemons' height",
   legend: { position: "none" },
   interpolateNulls: false,
 };
 const options3 = {
-    title: "Company Performance",
+    title: "Height vs. Weight of Pokemons",
     curveType: "function",
     legend: { position: "top" },
     interpolateNulls: false,
@@ -50,7 +50,6 @@ useEffect(() => {
             }
           });
         });
-        console.log(listNameHeight);
         const keys = Object.keys(pokemonTypes);
         const values = Object.values(pokemonTypes);
         var list=[["Types","Number"]];
